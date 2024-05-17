@@ -1,156 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Interactive Image Gallery</title>
     <style>
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        height: 100vh;
-        margin: 0;
-        background-color: #f0f0f0;
-      }
-      #counter-container {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding: 20px;
-        background-color: #333;
-        color: #fff;
-      }
-      #counter {
-        font-size: 24px;
-      }
-      img {
-        width: 100%;
-        max-width: 800px;
-        height: auto;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      #buttons-container {
-        display: flex;
-        width: 100%;
-        justify-content: space-between;
-        padding: 20px;
-      }
-      button {
-        font-size: 24px;
-        padding: 10px 20px;
-        margin: 0 10px;
-        width: 50%;
-        max-width: 200px;
-      }
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+        #counter-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        #counter {
+            font-size: 24px;
+        }
+        img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        #buttons-container {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 20px;
+            box-sizing: border-box; /* Include padding in element's total width and height */
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            width: 50%;
+            max-width: 200px;
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div id="counter-container">
-      <div id="counter">1/24</div>
+        <div id="counter">1/24</div>
     </div>
-    <img
-      id="image-viewer"
-      src="https://www.imocwx.com/cwm/cwmsjp_01.png"
-      alt="Image 1"
-    />
+    <img id="image-viewer" src="https://www.imocwx.com/cwm/cwmsjp_01.png" alt="Image 1" />
     <div id="buttons-container">
-      <button id="prev-8">&larr;</button>
-      <button id="next-8">&rarr;</button>
+        <button id="prev-8">&larr;</button>
+        <button id="next-8">&rarr;</button>
     </div>
     <script>
-      const images = [
-        "https://www.imocwx.com/cwm/cwmsjp_01.png",
-        "https://www.imocwx.com/cwm/cwmsjp_02.png",
-        "https://www.imocwx.com/cwm/cwmsjp_03.png",
-        "https://www.imocwx.com/cwm/cwmsjp_04.png",
-        "https://www.imocwx.com/cwm/cwmsjp_05.png",
-        "https://www.imocwx.com/cwm/cwmsjp_06.png",
-        "https://www.imocwx.com/cwm/cwmsjp_07.png",
-        "https://www.imocwx.com/cwm/cwmsjp_08.png",
-        "https://www.imocwx.com/cwm/cwmsjp_09.png",
-        "https://www.imocwx.com/cwm/cwmsjp_10.png",
-        "https://www.imocwx.com/cwm/cwmsjp_11.png",
-        "https://www.imocwx.com/cwm/cwmsjp_12.png",
-        "https://www.imocwx.com/cwm/cwmsjp_13.png",
-        "https://www.imocwx.com/cwm/cwmsjp_14.png",
-        "https://www.imocwx.com/cwm/cwmsjp_15.png",
-        "https://www.imocwx.com/cwm/cwmsjp_16.png",
-        "https://www.imocwx.com/cwm/cwmsjp_17.png",
-        "https://www.imocwx.com/cwm/cwmsjp_18.png",
-        "https://www.imocwx.com/cwm/cwmsjp_19.png",
-        "https://www.imocwx.com/cwm/cwmsjp_20.png",
-        "https://www.imocwx.com/cwm/cwmsjp_21.png",
-        "https://www.imocwx.com/cwm/cwmsjp_22.png",
-        "https://www.imocwx.com/cwm/cwmsjp_23.png",
-        "https://www.imocwx.com/cwm/cwmsjp_24.png",
-      ];
+        const images = [
+            "https://www.imocwx.com/cwm/cwmsjp_01.png",
+            "https://www.imocwx.com/cwm/cwmsjp_02.png",
+            "https://www.imocwx.com/cwm/cwmsjp_03.png",
+            "https://www.imocwx.com/cwm/cwmsjp_04.png",
+            "https://www.imocwx.com/cwm/cwmsjp_05.png",
+            "https://www.imocwx.com/cwm/cwmsjp_06.png",
+            "https://www.imocwx.com/cwm/cwmsjp_07.png",
+            "https://www.imocwx.com/cwm/cwmsjp_08.png",
+            "https://www.imocwx.com/cwm/cwmsjp_09.png",
+            "https://www.imocwx.com/cwm/cwmsjp_10.png",
+            "https://www.imocwx.com/cwm/cwmsjp_11.png",
+            "https://www.imocwx.com/cwm/cwmsjp_12.png",
+            "https://www.imocwx.com/cwm/cwmsjp_13.png",
+            "https://www.imocwx.com/cwm/cwmsjp_14.png",
+            "https://www.imocwx.com/cwm/cwmsjp_15.png",
+            "https://www.imocwx.com/cwm/cwmsjp_16.png",
+            "https://www.imocwx.com/cwm/cwmsjp_17.png",
+            "https://www.imocwx.com/cwm/cwmsjp_18.png",
+            "https://www.imocwx.com/cwm/cwmsjp_19.png",
+            "https://www.imocwx.com/cwm/cwmsjp_20.png",
+            "https://www.imocwx.com/cwm/cwmsjp_21.png",
+            "https://www.imocwx.com/cwm/cwmsjp_22.png",
+            "https://www.imocwx.com/cwm/cwmsjp_23.png",
+            "https://www.imocwx.com/cwm/cwmsjp_24.png",
+        ];
 
-      let currentIndex = 0;
-      const imageView = document.getElementById("image-viewer");
-      const counterView = document.getElementById("counter");
+        let currentIndex = 0;
+        const imageView = document.getElementById("image-viewer");
+        const counterView = document.getElementById("counter");
 
-      function showImage(index) {
-        if (index >= 0 && index < images.length) {
-          imageView.src = images[index];
-          imageView.alt = `Image ${index + 1}`;
-          counterView.textContent = `${index + 1}/${images.length}`;
+        function showImage(index) {
+            if (index >= 0 && index < images.length) {
+                imageView.src = images[index];
+                imageView.alt = `Image ${index + 1}`;
+                counterView.textContent = `${index + 1}/${images.length}`;
+            }
         }
-      }
 
-      function handleArrowPress(event) {
-        if (event.key === "ArrowRight") {
-          currentIndex = (currentIndex + 1) % images.length;
-          showImage(currentIndex);
-        } else if (event.key === "ArrowLeft") {
-          currentIndex = (currentIndex - 1 + images.length) % images.length;
-          showImage(currentIndex);
+        function handleArrowPress(event) {
+            if (event.key === "ArrowRight") {
+                currentIndex = (currentIndex + 1) % images.length;
+                showImage(currentIndex);
+            } else if (event.key === "ArrowLeft") {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                showImage(currentIndex);
+            }
         }
-      }
 
-      function handleSwipe(direction) {
-        if (direction === "left") {
-          currentIndex = (currentIndex + 1) % images.length;
-        } else if (direction === "right") {
-          currentIndex = (currentIndex - 1 + images.length) % images.length;
+        function handleSwipe(direction) {
+            if (direction === "left") {
+                currentIndex = (currentIndex + 1) % images.length;
+            } else if (direction === "right") {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+            }
+            showImage(currentIndex);
         }
+
+        function handlePrev8() {
+            currentIndex = (currentIndex - 8 + images.length) % images.length;
+            showImage(currentIndex);
+        }
+
+        function handleNext8() {
+            currentIndex = (currentIndex + 8) % images.length;
+            showImage(currentIndex);
+        }
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        function handleTouchStart(event) {
+            touchStartX = event.changedTouches[0].screenX;
+        }
+
+        function handleTouchEnd(event) {
+            touchEndX = event.changedTouches[0].screenX;
+            if (touchEndX < touchStartX) {
+                handleSwipe("left");
+            } else if (touchEndX > touchStartX) {
+                handleSwipe("right");
+            }
+        }
+
+        document.getElementById("prev-8").addEventListener("click", handlePrev8);
+        document.getElementById("next-8").addEventListener("click", handleNext8);
+        document.addEventListener("keydown", handleArrowPress);
+        document.addEventListener("touchstart", handleTouchStart);
+        document.addEventListener("touchend", handleTouchEnd);
+
         showImage(currentIndex);
-      }
-
-      function handlePrev8() {
-        currentIndex = (currentIndex - 8 + images.length) % images.length;
-        showImage(currentIndex);
-      }
-
-      function handleNext8() {
-        currentIndex = (currentIndex + 8) % images.length;
-        showImage(currentIndex);
-      }
-
-      let touchStartX = 0;
-      let touchEndX = 0;
-
-      function handleTouchStart(event) {
-        touchStartX = event.changedTouches[0].screenX;
-      }
-
-      function handleTouchEnd(event) {
-        touchEndX = event.changedTouches[0].screenX;
-        if (touchEndX < touchStartX) {
-          handleSwipe("left");
-        } else if (touchEndX > touchStartX) {
-          handleSwipe("right");
-        }
-      }
-
-      document.getElementById("prev-8").addEventListener("click", handlePrev8);
-      document.getElementById("next-8").addEventListener("click", handleNext8);
-      document.addEventListener("keydown", handleArrowPress);
-      document.addEventListener("touchstart", handleTouchStart);
-      document.addEventListener("touchend", handleTouchEnd);
-
-      showImage(currentIndex);
     </script>
-  </body>
+</body>
 </html>
