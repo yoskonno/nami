@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Image Gallery</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      #counter {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+      img {
+        max-width: 80%;
+        max-height: 80%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="counter">1/24</div>
+    <img
+      id="image-viewer"
+      src="https://www.imocwx.com/cwm/cwmsjp_01.png"
+      alt="Image 1"
+    />
+    <script>
+      const images = [
+        "https://www.imocwx.com/cwm/cwmsjp_01.png",
+        "https://www.imocwx.com/cwm/cwmsjp_02.png",
+        "https://www.imocwx.com/cwm/cwmsjp_03.png",
+        "https://www.imocwx.com/cwm/cwmsjp_04.png",
+        "https://www.imocwx.com/cwm/cwmsjp_05.png",
+        "https://www.imocwx.com/cwm/cwmsjp_06.png",
+        "https://www.imocwx.com/cwm/cwmsjp_07.png",
+        "https://www.imocwx.com/cwm/cwmsjp_08.png",
+        "https://www.imocwx.com/cwm/cwmsjp_09.png",
+        "https://www.imocwx.com/cwm/cwmsjp_10.png",
+        "https://www.imocwx.com/cwm/cwmsjp_11.png",
+        "https://www.imocwx.com/cwm/cwmsjp_12.png",
+        "https://www.imocwx.com/cwm/cwmsjp_13.png",
+        "https://www.imocwx.com/cwm/cwmsjp_14.png",
+        "https://www.imocwx.com/cwm/cwmsjp_15.png",
+        "https://www.imocwx.com/cwm/cwmsjp_16.png",
+        "https://www.imocwx.com/cwm/cwmsjp_17.png",
+        "https://www.imocwx.com/cwm/cwmsjp_18.png",
+        "https://www.imocwx.com/cwm/cwmsjp_19.png",
+        "https://www.imocwx.com/cwm/cwmsjp_20.png",
+        "https://www.imocwx.com/cwm/cwmsjp_21.png",
+        "https://www.imocwx.com/cwm/cwmsjp_22.png",
+        "https://www.imocwx.com/cwm/cwmsjp_23.png",
+        "https://www.imocwx.com/cwm/cwmsjp_24.png",
+      ];
+
+      let currentIndex = 0;
+      const imageView = document.getElementById("image-viewer");
+      const counterView = document.getElementById("counter");
+
+      function showImage(index) {
+        if (index >= 0 && index < images.length) {
+          imageView.src = images[index];
+          imageView.alt = `Image ${index + 1}`;
+          counterView.textContent = `${index + 1}/${images.length}`;
+        }
+      }
+
+      function handleArrowPress(event) {
+        if (event.key === "ArrowRight") {
+          currentIndex = (currentIndex + 1) % images.length;
+          showImage(currentIndex);
+        } else if (event.key === "ArrowLeft") {
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+          showImage(currentIndex);
+        }
+      }
+
+      function handleSwipe(direction) {
+        if (direction === "left") {
+          currentIndex = (currentIndex + 1) % images.length;
+        } else if (direction === "right") {
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+        }
+        showImage(currentIndex);
+      }
+
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      function handleTouchStart(event) {
+        touchStartX = event.changedTouches[0].screenX;
+      }
+
+      function handleTouchEnd(event) {
+        touchEndX = event.changedTouches[0].screenX;
+        if (touchEndX < touchStartX) {
+          handleSwipe("left");
+        } else if (touchEndX > touchStartX) {
+          handleSwipe("right");
+        }
+      }
+
+      document.addEventListener("keydown", handleArrowPress);
+      document.addEventListener("touchstart", handleTouchStart);
+      document.addEventListener("touchend", handleTouchEnd);
+
+      showImage(currentIndex);
+    </script>
+  </body>
+</html>
