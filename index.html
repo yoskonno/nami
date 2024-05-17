@@ -14,19 +14,33 @@
         margin: 0;
         background-color: #f0f0f0;
       }
+      #counter-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
       #counter {
         font-size: 24px;
-        margin-bottom: 20px;
+        margin: 0 20px;
       }
       img {
         max-width: 80%;
         max-height: 80%;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
+      button {
+        font-size: 24px;
+        padding: 10px 20px;
+        margin: 0 10px;
+      }
     </style>
   </head>
   <body>
-    <div id="counter">1/24</div>
+    <div id="counter-container">
+      <button id="prev-8">&lt; previous day</button>
+      <div id="counter">1/24</div>
+      <button id="next-8">next day &gt;</button>
+    </div>
     <img
       id="image-viewer"
       src="https://www.imocwx.com/cwm/cwmsjp_01.png"
@@ -91,6 +105,16 @@
         showImage(currentIndex);
       }
 
+      function handlePrev8() {
+        currentIndex = (currentIndex - 8 + images.length) % images.length;
+        showImage(currentIndex);
+      }
+
+      function handleNext8() {
+        currentIndex = (currentIndex + 8) % images.length;
+        showImage(currentIndex);
+      }
+
       let touchStartX = 0;
       let touchEndX = 0;
 
@@ -107,6 +131,8 @@
         }
       }
 
+      document.getElementById("prev-8").addEventListener("click", handlePrev8);
+      document.getElementById("next-8").addEventListener("click", handleNext8);
       document.addEventListener("keydown", handleArrowPress);
       document.addEventListener("touchstart", handleTouchStart);
       document.addEventListener("touchend", handleTouchEnd);
